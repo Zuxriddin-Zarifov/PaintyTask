@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PictureSharing.Repositories.DataContext;
+using PictureSharing.Repositories;
 
 namespace PictureSharing.Extations;
 

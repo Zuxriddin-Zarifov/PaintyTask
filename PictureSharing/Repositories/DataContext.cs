@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PictureSharing.Entity;
 
-namespace PictureSharing.Repositories.DataContext;
+namespace PictureSharing.Repositories;
 
 public class DataContext : DbContext
 {
