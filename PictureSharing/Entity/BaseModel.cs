@@ -4,6 +4,5 @@ namespace PictureSharing.Entity;
 
 public class BaseModel
 {
-    [Column("id")]
-    public long Id { get; set; }
+    [Column("id")] public long Id { get; set; }
 }

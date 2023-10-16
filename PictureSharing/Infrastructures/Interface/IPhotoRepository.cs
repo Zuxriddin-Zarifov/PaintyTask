@@ -1,6 +1,6 @@
 ﻿using PictureSharing.Entity;
 
-namespace PictureSharing.Repositories.Interface;
+namespace PictureSharing.Infrastructures.Interface;
 
 public interface IPhotoRepository : IRepositoryBase<Photo>
 {

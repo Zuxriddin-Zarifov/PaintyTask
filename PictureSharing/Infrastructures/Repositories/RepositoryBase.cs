@@ -1,14 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PictureSharing.Entity;
-using PictureSharing.Repositories.Interface;
+using PictureSharing.Infrastructures.Interface;
 
-namespace PictureSharing.Repositories;
+namespace PictureSharing.Infrastructures.Repositories;
 
 public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel
 {
     private readonly DbContext _context;
 
-    public RepositoryBase(DbContext context)
+    protected RepositoryBase(DbContext context)
     {
         _context = context;
     }
@@ -25,7 +25,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel
 
     public async ValueTask<T> GetByIdAsync(long id)
     {
-        T data = DbGetSet().Where(x => x.Id == id).FirstOrDefault();
+        var data = await DbGetSet().Where(x => x.Id == id).FirstOrDefaultAsync();
         if (data is null)
             throw new Exception("Data not fount");
         return data;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PictureSharing.Entity;
 
-namespace PictureSharing.Repositories.Interface;
+namespace PictureSharing.Infrastructures.Interface;
 
 public interface IRepositoryBase<T> where T : BaseModel
 {

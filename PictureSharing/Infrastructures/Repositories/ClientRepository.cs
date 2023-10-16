@@ -1,7 +1,7 @@
 ﻿using PictureSharing.Entity;
-using PictureSharing.Repositories.Interface;
+using PictureSharing.Infrastructures.Interface;
 
-namespace PictureSharing.Repositories;
+namespace PictureSharing.Infrastructures.Repositories;
 
 public class ClientRepository : RepositoryBase<Client> ,IClientRepository
 {

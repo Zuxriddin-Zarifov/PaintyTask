@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PictureSharing.Entity;
-using PictureSharing.Repositories.Interface;
+﻿using PictureSharing.Entity;
+using PictureSharing.Infrastructures.Interface;
 
-namespace PictureSharing.Repositories;
+namespace PictureSharing.Infrastructures.Repositories;
 
 public class PhotoRepository : RepositoryBase<Photo> , IPhotoRepository
 {
