@@ -21,11 +21,12 @@ public static class ConfigureExtensions
     public static void ConfigureRepositories(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<ExceptionHandlerMiddleware>();
-        serviceCollection.AddScoped<IClientRepository, ClientRepository>();
-        serviceCollection.AddScoped<IClientService, ClientService>();
         serviceCollection.AddScoped<IUserRepository, UserRepository>();
         serviceCollection.AddScoped<IUserService, UserService>();
         serviceCollection.AddScoped<IPhotoRepository, PhotoRepository>();
         serviceCollection.AddScoped<IPhotoService, PhotoService>();
+        serviceCollection.AddScoped<ITokenService, TokenService>();
+        serviceCollection.AddScoped<IAuthService, AuthService>();
+        
     }
 }

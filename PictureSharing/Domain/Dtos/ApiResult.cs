@@ -1,4 +1,4 @@
-﻿namespace PictureSharing.Entity;
+﻿namespace PictureSharing.Domain.Dtos;
 
 public class ApiResult<T>
 {

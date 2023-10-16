@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PictureSharing.Entity;
+using PictureSharing.Domain;
 
 namespace PictureSharing.Infrastructures.Interface;
 

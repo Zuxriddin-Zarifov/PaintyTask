@@ -1,12 +1,25 @@
-﻿using PictureSharing.Entity;
+﻿using PictureSharing.Domain.Entity;
 using PictureSharing.Infrastructures.Interface;
 
 namespace PictureSharing.Infrastructures.Services;
 
 public class PhotoService : IPhotoService
 {
-    public async ValueTask<Photo> Create(IFormFile file)
+    private readonly IPhotoRepository _photoRepository;
+
+    public PhotoService(IPhotoRepository photoRepository)
     {
-        throw new NotImplementedException();
+        _photoRepository = photoRepository;
+    }
+    public async ValueTask<Photo> Create(IFormFile file, string path,long userId)
+    {
+        using StreamWriter stream = new StreamWriter(path);
+        stream.Write(file);
+        Photo photo = new Photo
+        {
+            Name = file.Name,
+            UserId = userId,
+        };
+        return await _photoRepository.CreatAsync(photo);
     }
 }

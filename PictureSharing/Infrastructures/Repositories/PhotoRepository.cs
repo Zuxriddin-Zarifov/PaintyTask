@@ -1,4 +1,4 @@
-﻿using PictureSharing.Entity;
+﻿using PictureSharing.Domain.Entity;
 using PictureSharing.Infrastructures.Interface;
 
 namespace PictureSharing.Infrastructures.Repositories;

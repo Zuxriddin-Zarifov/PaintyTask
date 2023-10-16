@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace PictureSharing.Entity;
+namespace PictureSharing.Domain;
 
 public class AuditableModelBase : BaseModel
 {
