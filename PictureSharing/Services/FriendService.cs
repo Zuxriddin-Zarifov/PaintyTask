@@ -71,14 +71,16 @@ public class FriendService : IFriendService
                 FriendId = dto.FriendId,
                 Status = FriendsStatus.Blocked
             };
+            friend = await _friendRepository.CreatAsync(friend);
         }
 
         else
         {
             friend.Status = FriendsStatus.Blocked;
+            await _friendRepository.UpdateAsync(friend);
         }
 
-        return await _friendRepository.CreatAsync(friend);
+        return friend;
     }
 
     public async ValueTask<Friend> RequestFriendsAsync(FriendDto dto)
@@ -94,14 +96,16 @@ public class FriendService : IFriendService
                 FriendId = dto.FriendId,
                 Status = FriendsStatus.Requested
             };
+            friend = await _friendRepository.CreatAsync(friend);
         }
 
         else
         {
             friend.Status = FriendsStatus.Requested;
+            friend = await _friendRepository.UpdateAsync(friend);
         }
 
-        return await _friendRepository.CreatAsync(friend);
+        return friend;
     }
 
     public async ValueTask<Friend> RejectedFriendsAsync(FriendDto dto)
@@ -117,12 +121,14 @@ public class FriendService : IFriendService
                 FriendId = dto.FriendId,
                 Status = FriendsStatus.Rejected
             };
+            friend = await _friendRepository.CreatAsync(friend);
         }
 
         else
         {
             friend.Status = FriendsStatus.Rejected;
+            friend = await _friendRepository.CreatAsync(friend);
         }
-        return await _friendRepository.CreatAsync(friend);
+        return friend;
     }
 }
