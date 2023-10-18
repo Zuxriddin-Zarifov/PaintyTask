@@ -9,7 +9,8 @@ namespace PictureSharing.Extations;
 
 public static class ConfigureExtensions
 {
-    public static void ConfigureDbContexts(this IServiceCollection serviceCollection, ConfigurationManager configurationManager)
+    public static void ConfigureDbContexts(this IServiceCollection serviceCollection,
+        ConfigurationManager configurationManager)
     {
         serviceCollection.AddDbContext<DataContext>(optionsBuilder =>
         {
@@ -27,6 +28,7 @@ public static class ConfigureExtensions
         serviceCollection.AddScoped<IPhotoService, PhotoService>();
         serviceCollection.AddScoped<ITokenService, TokenService>();
         serviceCollection.AddScoped<IAuthService, AuthService>();
-        
+        serviceCollection.AddScoped<IFriendRepository, FriendRepository>();
+        serviceCollection.AddScoped<IFriendService, FriendService>();
     }
 }

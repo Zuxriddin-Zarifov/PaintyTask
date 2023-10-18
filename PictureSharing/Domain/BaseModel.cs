@@ -2,7 +2,7 @@
 
 namespace PictureSharing.Domain;
 
-public class BaseModel
+public class BaseModel<T>
 {
-    [Column("id")] public long Id { get; set; }
+    [Column("id")] public T Id { get; set; }
 }

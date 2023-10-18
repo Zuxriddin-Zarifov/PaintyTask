@@ -1,4 +1,7 @@
-﻿namespace PictureSharing.Middlewares;
+﻿using PictureSharing.Domain.Dtos;
+using PictureSharing.Domain.Expections;
+
+namespace PictureSharing.Middlewares;
 
 public class ExceptionHandlerMiddleware : IMiddleware
 {
@@ -8,9 +11,17 @@ public class ExceptionHandlerMiddleware : IMiddleware
         {
            await next(context);
         }
+        catch (CustomException e)
+        {
+            context.Response.StatusCode = e.StatusCode;
+            context.Response.WriteAsJsonAsync(e.Message);
+            Console.WriteLine(e.Message);
+        }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            context.Response.StatusCode = 400;
+            context.Response.WriteAsJsonAsync(e.Message);
+            Console.WriteLine(e.Message);
         }
     }
 }

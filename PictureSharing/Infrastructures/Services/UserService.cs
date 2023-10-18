@@ -14,8 +14,10 @@ public class UserService : IUserService
         _userRepository = userRepository;
     }
 
-    public async ValueTask<User> Create(RegistrationDto dto)
+    public async ValueTask<User> CreateAsync(RegistrationDto dto)
     {
+        if (dto is null)
+            throw new CustomException(400, "Bad request dto null");
         User user = new User
         {
             Password = dto.Password,
@@ -26,11 +28,11 @@ public class UserService : IUserService
        return await _userRepository.CreatAsync(user);
     }
 
-    public async ValueTask<User> GetUserByEmailAndPassword(string password, string email)
+    public async ValueTask<User> GetUserByEmailAndPasswordAsync(string password, string email)
     {
-        var user = _userRepository.DbGetSet().Where(user => user.Email == email && user.Password == password)
-            .FirstOrDefault();
-        if (user is not User)
+        var user = _userRepository.DbGetSet()
+            .FirstOrDefault(user => user.Email == email && user.Password == password);
+        if (user is null)
             throw new CustomException(404, "Not found");
         return user;
     }

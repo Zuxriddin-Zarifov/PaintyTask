@@ -1,6 +1,10 @@
-﻿namespace PictureSharing.Infrastructures.Interface;
+﻿using PictureSharing.Domain.Dtos;
+using PictureSharing.Domain.Entity;
 
-public class IFriendService
+namespace PictureSharing.Infrastructures.Interface;
+
+public interface IFriendService
 {
-    
+    public ValueTask<IEnumerable<Friend>> GetFriendsAsync(long userId);
+    public ValueTask<Friend> CreateAsync(FriendCreateDto dto);
 }

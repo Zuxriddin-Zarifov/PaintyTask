@@ -3,9 +3,9 @@ using PictureSharing.Infrastructures.Interface;
 
 namespace PictureSharing.Infrastructures.Repositories;
 
-public class FriendRepository : RepositoryBase<Friend>, IFriendRepository 
+public class FriendRepository : RepositoryBase<Friend,long>, IFriendRepository 
 {
-    protected FriendRepository(DataContext context) : base(context)
+    public FriendRepository(DataContext context) : base(context)
     {
     }
 }

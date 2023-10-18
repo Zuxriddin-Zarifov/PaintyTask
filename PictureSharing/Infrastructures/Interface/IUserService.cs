@@ -6,6 +6,6 @@ namespace PictureSharing.Infrastructures.Interface;
 
 public interface IUserService
 {
-    public ValueTask<User> Create(RegistrationDto dto);
-    public ValueTask<User> GetUserByEmailAndPassword(string password,string email);
+    public ValueTask<User> CreateAsync(RegistrationDto dto);
+    public ValueTask<User> GetUserByEmailAndPasswordAsync(string password,string email);
 }

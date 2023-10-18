@@ -15,7 +15,7 @@ public class TokenService : ITokenService
     {
         _configuration = configuration;
     }
-    public async ValueTask<string> GetToken()
+    public async ValueTask<string> GetTokenAsync(string email,string password)
     {
         string key = _configuration.GetSection("Authentication")["SecurityKey"];
         string issuer = _configuration.GetSection("Authentication")["Issuer"];
@@ -26,8 +26,8 @@ public class TokenService : ITokenService
         
         var claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.Name, "Zuxriddin"),
-            new Claim("password", "Zarifov12345678")
+            new Claim(ClaimTypes.Email, email),
+            new Claim("password", password)
         };
 
         var jwtSecurityToken = new JwtSecurityToken(

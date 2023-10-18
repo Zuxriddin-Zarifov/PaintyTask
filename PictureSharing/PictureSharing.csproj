@@ -22,7 +22,13 @@
 
     <ItemGroup>
       <Folder Include="Api\" />
+      <Folder Include="Migrations\" />
       <Folder Include="wwwroot\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\1\1" />
+      <_ContentIncludedByDefault Remove="wwwroot\4\4" />
     </ItemGroup>
    
 

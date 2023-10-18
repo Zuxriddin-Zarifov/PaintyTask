@@ -3,7 +3,7 @@
 public class ApiResult<T>
 {
     public T? Data { get; set; }
-    public string? Message { get; set; }
+    public string? Message { get; set; } = "Susses";
     public int StatusCode { get; set; }
 
     public static implicit operator ApiResult<T>((T data, int statusCode) payload) => new ApiResult<T>()

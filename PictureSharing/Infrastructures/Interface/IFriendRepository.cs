@@ -2,7 +2,6 @@
 
 namespace PictureSharing.Infrastructures.Interface;
 
-public interface IFriendRepository : IRepositoryBase<Friend> 
+public interface IFriendRepository : IRepositoryBase<Friend,long>
 {
-    
 }

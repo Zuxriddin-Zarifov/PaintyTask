@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using PictureSharing.Domain;
 using PictureSharing.Domain.Entity;
 
@@ -42,17 +43,41 @@ public class DataContext : DbContext
 
     public void TrackEntities()
     {
-        var updatedEntries = this.ChangeTracker
+        var updatedEntriesLong = this.ChangeTracker
             .Entries()
             .Where(x => (x.State == EntityState.Added
                          || x.State == EntityState.Modified)
                         && x.Entity.GetType().BaseType is not null
-                        && x.Entity.GetType().BaseType == typeof(AuditableModelBase));
-        
+                        && x.Entity.GetType().BaseType == typeof(AuditableModelBase<long>));
+        var updatedEntriesGuid = this.ChangeTracker
+            .Entries()
+            .Where(x => (x.State == EntityState.Added
+                         || x.State == EntityState.Modified)
+                        && x.Entity.GetType().BaseType is not null
+                        && x.Entity.GetType().BaseType == typeof(AuditableModelBase<Guid>));
+        TrackEntitiesLong(updatedEntriesLong);
+        TrackEntitiesGuid(updatedEntriesGuid);
 
+    }
+
+    public void TrackEntitiesGuid(IEnumerable<EntityEntry> updatedEntries)
+    {
+        
         foreach (var entityEntry in updatedEntries)
         {
-            var entity = (AuditableModelBase)entityEntry.Entity;
+            var entity = (AuditableModelBase<Guid>)entityEntry.Entity;
+            if (entityEntry.State == EntityState.Added)
+                entity.CreatedAt = DateTime.Now;
+            else
+                entity.UpdatedAt = DateTime.Now;
+        }
+    }
+
+    public void TrackEntitiesLong(IEnumerable<EntityEntry> updatedEntries)
+    {
+        foreach (var entityEntry in updatedEntries)
+        {
+            var entity = (AuditableModelBase<long>)entityEntry.Entity;
             if (entityEntry.State == EntityState.Added)
                 entity.CreatedAt = DateTime.Now;
             else

@@ -2,5 +2,5 @@
 
 public interface ITokenService
 {
-    public ValueTask<string> GetToken();
+    public ValueTask<string> GetTokenAsync(string email,string password);
 }

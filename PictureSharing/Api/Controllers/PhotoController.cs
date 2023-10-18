@@ -6,28 +6,34 @@ using PictureSharing.Infrastructures.Interface;
 
 namespace PictureSharing.Controllers;
 
-
-[ApiController]
-[Route("[controller]")]
+[ApiController, Route("[controller]")]
 public class PhotoController : ControllerBase
 {
     private readonly IPhotoRepository _photoRepository;
     private readonly IPhotoService _photoService;
     private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public PhotoController(IPhotoRepository photoRepository,IPhotoService photoService, IWebHostEnvironment webHostEnvironment)
+    public PhotoController(IPhotoRepository photoRepository, IPhotoService photoService,
+        IWebHostEnvironment webHostEnvironment)
     {
         _photoRepository = photoRepository;
         _photoService = photoService;
         _webHostEnvironment = webHostEnvironment;
     }
 
-    [HttpPost,Authorize]
-    public async ValueTask<ApiResult<Photo>> CreateAsync(IFormFile file,long userId)
+    [HttpPost, Authorize]
+    public async ValueTask<ApiResult<Photo>> CreateAsync(IFormFile file, long userId)
     {
-        var rootPath = _webHostEnvironment.WebRootPath;
-        var path = Path.Combine(rootPath, file.Name);
-        var photo = await _photoService.Create(file, path, userId);
-        return photo;
+
+        var webRootPath = _webHostEnvironment.WebRootPath;
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), webRootPath, "photos");
+
+        return await _photoService.CreateAsync(file, filePath, userId);
+    }
+
+    [HttpGet("{id:long}"), Authorize]
+    public async ValueTask<ApiResult<IEnumerable<Photo>>> GetPhotoByUserIdAsync(long id)
+    {
+        return ApiResult<Photo>.FromIEnumerable(await _photoService.GetPhotoByUserIdAsync(id));
     }
 }

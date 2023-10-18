@@ -5,7 +5,7 @@ using PictureSharing.Infrastructures.Interface;
 
 namespace PictureSharing.Infrastructures.Repositories;
 
-public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel
+public class RepositoryBase<T,TId> : IRepositoryBase<T,TId> where T : BaseModel<TId>
 {
     private readonly DataContext _context;
 
@@ -24,9 +24,9 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel
         return await DbGetSet().ToListAsync();
     }
 
-    public async ValueTask<T> GetByIdAsync(long id)
+    public async ValueTask<T> GetByIdAsync(TId id)
     {
-        var data = await DbGetSet().Where(x => x.Id == id).FirstOrDefaultAsync();
+        var data = await DbGetSet().FirstOrDefaultAsync(x => x.Id.Equals(id));
         if (data is null)
             throw new CustomException(404,"Data not fount");
         return data;
@@ -46,7 +46,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : BaseModel
         return entityResult.Entity;
     }
 
-    public async ValueTask<T> DeleteAsync(long id)
+    public async ValueTask<T> DeleteAsync(TId id)
     {
         var data = await GetByIdAsync(id);
         var entityResult = DbGetSet().Remove(data);
