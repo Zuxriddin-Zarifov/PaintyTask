@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PictureSharing.Infrastructures;
 using PictureSharing.Infrastructures.Interface;
+using PictureSharing.Services.Interface;
 using PictureSharing.Infrastructures.Repositories;
-using PictureSharing.Infrastructures.Services;
 using PictureSharing.Middlewares;
+using PictureSharing.Services;
 
 namespace PictureSharing.Extations;
 

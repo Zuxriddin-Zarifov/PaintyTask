@@ -1,11 +1,11 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using PictureSharing.Infrastructures.Interface;
+using PictureSharing.Services.Interface;
 using Microsoft.IdentityModel.Tokens;
 
 
-namespace PictureSharing.Infrastructures.Services;
+namespace PictureSharing.Services;
 
 public class TokenService : ITokenService
 {

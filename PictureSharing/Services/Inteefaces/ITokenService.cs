@@ -1,4 +1,4 @@
-﻿namespace PictureSharing.Infrastructures.Interface;
+﻿namespace PictureSharing.Services.Interface;
 
 public interface ITokenService
 {

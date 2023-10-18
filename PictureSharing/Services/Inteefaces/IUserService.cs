@@ -2,7 +2,7 @@
 using PictureSharing.Domain.Dtos;
 using PictureSharing.Domain.Entity;
 
-namespace PictureSharing.Infrastructures.Interface;
+namespace PictureSharing.Services.Interface;
 
 public interface IUserService
 {

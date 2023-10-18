@@ -74,19 +74,12 @@ namespace PictureSharing.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     name = table.Column<string>(type: "text", nullable: false),
                     user_id = table.Column<long>(type: "bigint", nullable: false),
-                    Photo = table.Column<long>(type: "bigint", nullable: true),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_photos", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_photos_users_Photo",
-                        column: x => x.Photo,
-                        principalSchema: "picture_sharing",
-                        principalTable: "users",
-                        principalColumn: "id");
                     table.ForeignKey(
                         name: "FK_photos_users_user_id",
                         column: x => x.user_id,
@@ -107,12 +100,6 @@ namespace PictureSharing.Migrations
                 schema: "picture_sharing",
                 table: "friends",
                 column: "user_id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_photos_Photo",
-                schema: "picture_sharing",
-                table: "photos",
-                column: "Photo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_photos_user_id",

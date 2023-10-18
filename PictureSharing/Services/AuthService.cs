@@ -2,8 +2,9 @@
 using PictureSharing.Domain.Entity;
 using PictureSharing.Domain.Expections;
 using PictureSharing.Infrastructures.Interface;
+using PictureSharing.Services.Interface;
 
-namespace PictureSharing.Infrastructures.Services;
+namespace PictureSharing.Services;
 
 public class AuthService : IAuthService
 {

@@ -10,5 +10,5 @@ public class User : AuditableModelBase<long>
     [Column("email")] public string Email { get; set; }
     [Column("name")] public string Name { get; set; }
     [Column("surname")] public string Surname { get; set; }
-    [ForeignKey(nameof(Photo))] public List<Photo> Photos { get; set; }
+    public List<Photo>? Photos { get; set; }
 }

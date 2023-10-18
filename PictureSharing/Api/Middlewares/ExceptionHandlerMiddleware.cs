@@ -1,5 +1,4 @@
-﻿using PictureSharing.Domain.Dtos;
-using PictureSharing.Domain.Expections;
+﻿using PictureSharing.Domain.Expections;
 
 namespace PictureSharing.Middlewares;
 

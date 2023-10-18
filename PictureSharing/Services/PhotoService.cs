@@ -1,8 +1,9 @@
 ﻿using PictureSharing.Domain.Entity;
 using PictureSharing.Domain.Expections;
 using PictureSharing.Infrastructures.Interface;
+using PictureSharing.Services.Interface;
 
-namespace PictureSharing.Infrastructures.Services;
+namespace PictureSharing.Services;
 
 public class PhotoService : IPhotoService
 {
@@ -25,11 +26,11 @@ public class PhotoService : IPhotoService
             Directory.CreateDirectory(filePath);
         }
 
-        var photo = new Photo
+        var photo = await _photoRepository.CreatAsync(new Photo
         {
             Name = file.FileName,
             UserId = userId
-        };
+        });
 
         filePath = Path.Combine(filePath, photo.Id.ToString());
         using (var stream = new FileStream(filePath, FileMode.Create))
@@ -37,7 +38,7 @@ public class PhotoService : IPhotoService
             await file.CopyToAsync(stream);
         }
 
-        return await _photoRepository.CreatAsync(photo);
+        return photo;
     }
 
     public async ValueTask<IEnumerable<Photo>> GetPhotoByUserIdAsync(long userId)
@@ -45,6 +46,23 @@ public class PhotoService : IPhotoService
         var user = await _userRepository.GetByIdAsync(userId);
         if (user is null)
             throw new CustomException(404, "User not found");
-        return user.Photos;
+        return null; //user.Photos;
+    }
+
+    public async ValueTask<Photo> DeleteAsync(string path,Photo photo)
+    {
+        var filePath = Path.Combine(path, photo.Id.ToString());
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+        else
+        {
+            throw new CustomException(404, "file not found");
+        }
+
+        photo = await _photoRepository.DeleteAsync(photo.Id);
+
+        return photo;
     }
 }

@@ -76,9 +76,6 @@ namespace PictureSharing.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<long?>("Photo")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("updated_at");
@@ -88,8 +85,6 @@ namespace PictureSharing.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Photo");
 
                     b.HasIndex("UserId");
 
@@ -159,12 +154,8 @@ namespace PictureSharing.Migrations
 
             modelBuilder.Entity("PictureSharing.Domain.Entity.Photo", b =>
                 {
-                    b.HasOne("PictureSharing.Domain.Entity.User", null)
-                        .WithMany("Photos")
-                        .HasForeignKey("Photo");
-
                     b.HasOne("PictureSharing.Domain.Entity.User", "User")
-                        .WithMany()
+                        .WithMany("Photos")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

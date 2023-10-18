@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PictureSharing.Domain.Dtos;
 using PictureSharing.Domain.Entity;
-using PictureSharing.Infrastructures.Interface;
+using PictureSharing.Services.Interface;
 
 namespace PictureSharing.Controllers;
 
